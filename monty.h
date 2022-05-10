@@ -36,8 +36,12 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+void start(FILE *file);
+void (*get_instruction(char *word))(stack_t **stack, unsigned int line_number);
+
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
 
 stack_t *add_dnodeint(stack_t **head, const int n);
 stack_t *add_dnodeint_end(stack_t **head, const int n);
