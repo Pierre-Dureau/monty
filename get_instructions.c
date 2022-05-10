@@ -13,10 +13,15 @@ void (*get_instruction(char *word))(stack_t **stack, unsigned int line_number)
 	instruction_t function[] = {
 		{"pall", pall},
 		{"pint", pint},
-		{"pop", pop}
+		{"pop", pop},
+		{"add", add},
+		{"sub", sub},
+		{"div", div},
+		{"mul", mul},
+		{"mod", mod}
 	};
 
-	for (i = 0; i < 3; i++)
+	for (i = 0; i < 8; i++)
 	{
 		if (strcmp(function[i].opcode, word) == 0)
 		{
