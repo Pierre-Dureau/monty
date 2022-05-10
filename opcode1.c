@@ -53,3 +53,28 @@ void pop(stack_t **stack, unsigned int line_number)
 	if (start != NULL)
 		start->prev = NULL;
 }
+
+/**
+ * swap - Swaps the top two elements of the stack
+ * 
+ * @stack: A pointer to the adress of the doubly linked list
+ * @line_number: The line number of the monty file
+ */
+void swap(stack_t **stack, unsigned int line_number)
+{
+	stack_t *head = *stack, *tmp;
+
+	// If empty list or contains just one node
+	if (*stack == NULL || (*stack)->next == NULL)
+		return;
+
+	tmp = head->next;
+
+	head->next = head->next->next;
+	if (head->next->prev)
+		head->next->prev = head;
+	head->prev = tmp;
+	tmp->next = head;
+	tmp->prev = NULL;
+	*stack = tmp;
+}
