@@ -1,5 +1,20 @@
 #include "monty.h"
 
+size_t print_dlistint(stack_t *h)
+{
+	size_t count = 0;
+	stack_t *t = h;
+
+	while (t)
+	{
+		printf("%d\n", t->n);
+		t = t->next;
+		count++;
+	}
+
+	return (count);
+}
+
 /**
  * start - Get the lines of the file and do the instruction
  *
@@ -10,39 +25,44 @@ void start(FILE *file)
 {
 	stack_t *head = NULL;
 	char line[100];
-	char *t, *word, *number;
-	int value, ln = 0, i, j;
+	char *token, *word, *number, *temp;
+	int value, ln = 0, i, j, check = 0;
 	void (*fnc)(stack_t **stack, unsigned int line_number);
 
 	while (fgets(line, 100, file) != NULL)
 	{
 		ln++;
-		t = strtok(line, " \n");
-		word = strdup(t);
+		token = strtok(line, " \n");
+		word = strdup(token);
 		if (strcmp(word, "push") == 0)
 		{
-			for (i = 5; t[i] >= '0' && t[i] <= '9'; i++);
-			if (i > 5)
+			token = strtok(NULL, "\n");
+			for (; *token == ' '; token++);
+			temp = token;
+			for (i = 0; *temp >= '0' && *temp <= '9'; temp++, i++)
+				check = 1;
+
+			if (check == 1)
 			{
-				number = malloc(sizeof(char) * (i - 5));
-				for (j = 5; j < i; j++)
-					number[j - 5] = t[j];
+				check = 0;
+				number = malloc(sizeof(char) * i);
+				for (j = 0; j < i; j++, token++)
+					number[j] = *token;
+
 				value = atoi(number);
 				free(number);
 				add_dnodeint(&head, value);
 			}
 			else
 			{
-				fprintf(stderr, "L%d: usage: push integer", ln);
+				fprintf(stderr, "L%d: usage: push integer\n", ln);
 			}
 			free(word);
 			continue;
 		}
 		fnc = get_instruction(word);
 		if (fnc)
-		{
 			fnc(&head, ln);
-		}
 		free(word);
 	}
 }
