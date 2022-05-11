@@ -23,7 +23,7 @@ void pchar(stack_t **stack, unsigned int line_number)
 {
 	stack_t *head = *stack;
 
-	if (*stack == NULL)
+	if (*stack == NULL || stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
 		handle_exit(head);
