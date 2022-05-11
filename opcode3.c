@@ -25,7 +25,7 @@ void pchar(stack_t **stack, unsigned int line_number)
 /**
  * pstr - Print the string starting at the top of the stack
  *
- * @stack: A poipnter to the adress of the doubly linked list
+ * @stack: A pointer to the adress of the doubly linked list
  * @line_number: The line number of the monty file
  */
 void pstr(stack_t **stack, unsigned int line_number)
@@ -38,4 +38,5 @@ void pstr(stack_t **stack, unsigned int line_number)
 		tmp = tmp->next;
 	}
 	printf("\n");
+	(void)line_number;
 }

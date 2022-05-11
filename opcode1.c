@@ -1,5 +1,34 @@
 #include "monty.h"
 
+int push(unsigned int line_number, char *token)
+{
+	char *temp, *number;
+	int i, j, value, check = 0;
+
+	token = strtok(NULL, "\n");
+	for (; *token == ' '; token++)
+		;
+	temp = token;
+	for (i = 0; *temp >= '0' && *temp <= '9'; temp++, i++)
+		check = 1;
+
+	if (check == 1)
+	{
+		check = 0;
+		number = malloc(sizeof(char) * (i + 1));
+		for (j = 0; j < i; j++, token++)
+			number[j] = *token;
+		number[j] = '\0';
+		value = atoi(number);
+		free(number);
+		return (value);
+	}
+	else
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+
+	return (-1);
+}
+
 /**
  * @brief
  *
