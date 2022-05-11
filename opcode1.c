@@ -16,18 +16,21 @@ int push(stack_t **stack, unsigned int line_number, char *token)
 	int i, j, value, check = 0, neg = 0;
 
 	token = strtok(NULL, "\n");
-	for (; *token == ' '; token++)
-		;
-	temp = token;
-	if (*token == '-')
+	if (token)
 	{
-		neg = 1;
-		temp++;
+		for (; *token == ' '; token++)
+			;
+		temp = token;
+		if (*token == '-')
+		{
+			neg = 1;
+			temp++;
+		}
+		for (i = 0; *temp >= '0' && *temp <= '9'; temp++, i++)
+			check = 1;
+		if (*temp != ' ' && *temp != '\n' && *temp != '\0')
+			check = 0;
 	}
-	for (i = 0; *temp >= '0' && *temp <= '9'; temp++, i++)
-		check = 1;
-	if (*temp != ' ' && *temp != '\n' && *temp != '\0')
-		check = 0;
 	if (check == 1)
 	{
 		if (neg == 1)
