@@ -26,7 +26,7 @@ int main(int ac, char **av)
 			exit(EXIT_FAILURE);
 		}
 		else
-			start();
+			start(file);
 	}
 	fclose(file);
 	return (EXIT_SUCCESS);
@@ -38,7 +38,7 @@ int main(int ac, char **av)
  * @file: Monty file with instructions
  */
 
-void start()
+void start(FILE *file)
 {
 	stack_t *head = NULL;
 	char line[100];
@@ -58,7 +58,7 @@ void start()
 				continue;
 			if (strcmp(word, "push") == 0)
 			{
-				value = push(&head, ln, token);
+				value = push(&head, ln, token, file);
 				if (value != -1)
 					add_dnodeint(&head, value);
 			}
@@ -87,6 +87,5 @@ void start()
 void handle_exit(stack_t *stack)
 {
 	free_dlistint(stack);
-	fclose(file);
 	exit(EXIT_FAILURE);
 }

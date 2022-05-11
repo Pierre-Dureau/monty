@@ -9,7 +9,7 @@
  * Return: Value to push
  */
 
-int push(stack_t **stack, unsigned int line_number, char *token)
+int push(stack_t **stack, unsigned int line_number, char *token, FILE *file)
 {
 	stack_t *head = *stack;
 	char *temp, *number;
@@ -45,6 +45,7 @@ int push(stack_t **stack, unsigned int line_number, char *token)
 	else
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		fclose(file);
 		handle_exit(head);
 	}
 	return (-1);
