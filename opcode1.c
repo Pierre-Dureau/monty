@@ -8,8 +8,9 @@
  * Return: Value to push
  */
 
-int push(unsigned int line_number, char *token)
+int push(stack_t **stack, unsigned int line_number, char *token)
 {
+	stack_t *head = *stack;
 	char *temp, *number;
 	int i, j, value, check = 0, neg = 0;
 
@@ -43,7 +44,7 @@ int push(unsigned int line_number, char *token)
 	else
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
+		handle_exit(head);
 	}
 	return (-1);
 }
@@ -76,10 +77,12 @@ void pall(stack_t **stack, unsigned int line_number)
 
 void pint(stack_t **stack, unsigned int line_number)
 {
+	stack_t *head = *stack;
+
 	if (!*stack)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
-		exit(EXIT_FAILURE);
+		handle_exit(head);
 	}
 
 	printf("%d\n", (*stack)->n);
@@ -94,19 +97,19 @@ void pint(stack_t **stack, unsigned int line_number)
 
 void pop(stack_t **stack, unsigned int line_number)
 {
-	stack_t *start = *stack;
+	stack_t *head = *stack;
 
 	if (!*stack)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-		exit(EXIT_FAILURE);
+		handle_exit(head);
 	}
 
-	start = start->next;
+	head = head->next;
 	free(*stack);
-	*stack = start;
-	if (start != NULL)
-		start->prev = NULL;
+	*stack = head;
+	if (head != NULL)
+		head->prev = NULL;
 }
 
 /**
@@ -122,12 +125,12 @@ void swap(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
+		handle_exit(head);
 	}
 
 	tmp = head->next;
 	head->next = head->next->next;
-	if (head->next->prev)
+	if (head->next)
 		head->next->prev = head;
 	head->prev = tmp;
 	tmp->next = head;

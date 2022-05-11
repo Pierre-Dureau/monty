@@ -10,8 +10,6 @@
 
 int main(int ac, char **av)
 {
-	FILE *file;
-
 	if (ac != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
@@ -29,7 +27,7 @@ int main(int ac, char **av)
 			start(file);
 	}
 	fclose(file);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 /**
@@ -53,12 +51,12 @@ void start(FILE *file)
 		{
 			token = strtok(line, " \n");
 			if (token)
-				word = strdup(token);
+				word = token;
 			else
 				continue;
 			if (strcmp(word, "push") == 0)
 			{
-				value = push(ln, token);
+				value = push(&head, ln, token);
 				if (value != -1)
 					add_dnodeint(&head, value);
 			}
@@ -70,11 +68,16 @@ void start(FILE *file)
 				else
 				{
 					fprintf(stderr, "L%d: unknown instruction %s\n", ln, word);
-					exit(EXIT_FAILURE);
+					handle_exit(head);
 				}
 			}
-			free(word);
 		}
 	}
-	free_dlistint(head);
+}
+
+void handle_exit(stack_t *stack)
+{
+	free_dlistint(stack);
+	fclose(file);
+	exit(EXIT_FAILURE);
 }
