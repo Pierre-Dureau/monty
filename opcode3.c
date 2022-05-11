@@ -1,6 +1,19 @@
 #include "monty.h"
 
 /**
+ * nop - Doesn't do anything
+ *
+ * @stack: A poipnter to the adress of the doubly linked list
+ * @line_number: The line number of the monty file
+ */
+
+void nop(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+}
+
+/**
  * pchar - Print the char at the top of the stack
  *
  * @stack: A poipnter to the adress of the doubly linked list
