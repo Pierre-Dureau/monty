@@ -75,6 +75,7 @@ void start(FILE *file)
 			}
 		}
 	}
+	free_dlistint(head);
 }
 
 /**
