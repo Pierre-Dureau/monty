@@ -1,5 +1,12 @@
 #include "monty.h"
 
+/**
+ * add - Add the 2 first values
+ *
+ * @stack: A pointer to the adress of the doubly linked list
+ * @line_number: The line number of the monty file
+ */
+
 void add(stack_t **stack, unsigned int line_number)
 {
 	stack_t *head = *stack;
@@ -19,6 +26,13 @@ void add(stack_t **stack, unsigned int line_number)
 	pop(stack, line_number);
 }
 
+/**
+ * sub - Substract the 2 first values
+ *
+ * @stack: A pointer to the adress of the doubly linked list
+ * @line_number: The line number of the monty file
+ */
+
 void sub(stack_t **stack, unsigned int line_number)
 {
 	stack_t *head = *stack;
@@ -37,6 +51,13 @@ void sub(stack_t **stack, unsigned int line_number)
 	(*stack)->n = sub;
 	pop(stack, line_number);
 }
+
+/**
+ * _div - Divide the 2 first values
+ *
+ * @stack: A pointer to the adress of the doubly linked list
+ * @line_number: The line number of the monty file
+ */
 
 void _div(stack_t **stack, unsigned int line_number)
 {
@@ -62,6 +83,13 @@ void _div(stack_t **stack, unsigned int line_number)
 	pop(stack, line_number);
 }
 
+/**
+ * mul - Multiply the 2 first values
+ *
+ * @stack: A pointer to the adress of the doubly linked list
+ * @line_number: The line number of the monty file
+ */
+
 void mul(stack_t **stack, unsigned int line_number)
 {
 	stack_t *head = *stack;
@@ -80,6 +108,13 @@ void mul(stack_t **stack, unsigned int line_number)
 	(*stack)->n = mul;
 	pop(stack, line_number);
 }
+
+/**
+ * mod - Module the 2 first values
+ *
+ * @stack: A pointer to the adress of the doubly linked list
+ * @line_number: The line number of the monty file
+ */
 
 void mod(stack_t **stack, unsigned int line_number)
 {

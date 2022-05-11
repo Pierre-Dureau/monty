@@ -48,9 +48,9 @@ void start(FILE *file)
 
 	while (fgets(line, 100, file) != NULL)
 	{
+		ln++;
 		if (line[0] != '\n')
 		{
-			ln++;
 			token = strtok(line, " \n");
 			if (token)
 				word = strdup(token);

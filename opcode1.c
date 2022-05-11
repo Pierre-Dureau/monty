@@ -1,5 +1,13 @@
 #include "monty.h"
 
+/**
+ * push - Push a number in the Stack
+ *
+ * @line_number: Number of the line
+ * @token: Line
+ * Return: Value to push
+ */
+
 int push(unsigned int line_number, char *token)
 {
 	char *temp, *number;
@@ -30,10 +38,10 @@ int push(unsigned int line_number, char *token)
 }
 
 /**
- * @brief
+ * pall - Print the list
  *
- * @param stack
- * @param line_number
+ * @stack: A pointer to the adress of the doubly linked list
+ * @line_number: The line number of the monty file
  */
 
 void pall(stack_t **stack, unsigned int line_number)
@@ -49,10 +57,10 @@ void pall(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * @brief
+ * pint - Print the first value
  *
- * @param stack
- * @param line_number
+ * @stack: A pointer to the adress of the doubly linked list
+ * @line_number: The line number of the monty file
  */
 
 void pint(stack_t **stack, unsigned int line_number)
@@ -65,6 +73,13 @@ void pint(stack_t **stack, unsigned int line_number)
 
 	printf("%d\n", (*stack)->n);
 }
+
+/**
+ * pop - Delete the first value
+ *
+ * @stack: A pointer to the adress of the doubly linked list
+ * @line_number: The line number of the monty file
+ */
 
 void pop(stack_t **stack, unsigned int line_number)
 {
