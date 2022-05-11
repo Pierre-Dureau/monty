@@ -1,18 +1,35 @@
 #include "monty.h"
 
-size_t print_dlistint(stack_t *h)
-{
-	size_t count = 0;
-	stack_t *t = h;
+/**
+ * main - Read Monty byte code files
+ *
+ * @ac: Number of arguments
+ * @av: Arguements
+ * Return: 0
+ */
 
-	while (t)
+int main(int ac, char **av)
+{
+	FILE *file;
+
+	if (ac != 2)
 	{
-		printf("%d\n", t->n);
-		t = t->next;
-		count++;
+		fprintf(stderr, "USAGE: monty file");
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		file = fopen(av[1], "r");
+		if (!file)
+		{
+			fprintf(stderr, "Error: Can't open file <file>");
+			exit(EXIT_FAILURE);
+		}
+		else
+			start(file);
 	}
 
-	return (count);
+	return (0);
 }
 
 /**
@@ -65,36 +82,5 @@ void start(FILE *file)
 			fnc(&head, ln);
 		free(word);
 	}
-}
-
-/**
- * main - Read Monty byte code files
- *
- * @ac: Number of arguments
- * @av: Arguements
- * Return: 0
- */
-
-int main(int ac, char **av)
-{
-	FILE *file;
-
-	if (ac != 2)
-	{
-		fprintf(stderr, "USAGE: monty file");
-		exit(EXIT_FAILURE);
-	}
-	else
-	{
-		file = fopen(av[1], "r");
-		if (!file)
-		{
-			fprintf(stderr, "Error: Can't open file <file>");
-			exit(EXIT_FAILURE);
-		}
-		else
-			start(file);
-	}
-
-	return (0);
+	free_dlistint(head);
 }
