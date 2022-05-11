@@ -67,6 +67,11 @@ void start(FILE *file)
 				fnc = get_instruction(word);
 				if (fnc)
 					fnc(&head, ln);
+				else
+				{
+					fprintf(stderr, "L%d: unknown instruction %s\n", ln, word);
+					exit(EXIT_FAILURE);
+				}
 			}
 			free(word);
 		}

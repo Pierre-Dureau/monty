@@ -11,19 +11,27 @@
 int push(unsigned int line_number, char *token)
 {
 	char *temp, *number;
-	int i, j, value, check = 0;
+	int i, j, value, check = 0, neg = 0;
 
 	token = strtok(NULL, "\n");
 	for (; *token == ' '; token++)
 		;
 	temp = token;
+	if (*token == '-')
+	{
+		neg = 1;
+		temp++;
+	}
 	for (i = 0; *temp >= '0' && *temp <= '9'; temp++, i++)
 		check = 1;
 
 	if (check == 1)
 	{
-		check = 0;
+		if (neg == 1)
+			i += 1;
 		number = malloc(sizeof(char) * (i + 1));
+		if (neg == 1)
+			number[0] = '-';
 		for (j = 0; j < i; j++, token++)
 			number[j] = *token;
 		number[j] = '\0';
