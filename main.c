@@ -10,6 +10,8 @@
 
 int main(int ac, char **av)
 {
+	FILE *file;
+
 	if (ac != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
@@ -75,9 +77,14 @@ void start(FILE *file)
 	}
 }
 
+/**
+ * handle_exit - When an error happened
+ *
+ * @stack: The list
+ */
+
 void handle_exit(stack_t *stack)
 {
 	free_dlistint(stack);
-	fclose(file);
 	exit(EXIT_FAILURE);
 }

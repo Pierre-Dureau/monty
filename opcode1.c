@@ -3,6 +3,7 @@
 /**
  * push - Push a number in the Stack
  *
+ * @stack: The list
  * @line_number: Number of the line
  * @token: Line
  * Return: Value to push
