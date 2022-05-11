@@ -58,7 +58,7 @@ void start(FILE *file)
 				continue;
 			if (strcmp(word, "push") == 0)
 			{
-				value = push(&head, ln, token, file);
+				value = push(&head, ln, token);
 				if (value != -1)
 					add_dnodeint(&head, value);
 			}
