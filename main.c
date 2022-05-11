@@ -28,7 +28,7 @@ int main(int ac, char **av)
 		else
 			start(file);
 	}
-
+	fclose(file);
 	return (0);
 }
 
@@ -42,45 +42,34 @@ void start(FILE *file)
 {
 	stack_t *head = NULL;
 	char line[100];
-	char *token, *word, *number, *temp;
-	int value, ln = 0, i, j, check = 0;
+	char *token, *word;
+	int ln = 0, value;
 	void (*fnc)(stack_t **stack, unsigned int line_number);
 
 	while (fgets(line, 100, file) != NULL)
 	{
-		ln++;
-		token = strtok(line, " \n");
-		word = strdup(token);
-		if (strcmp(word, "push") == 0)
+		if (line[0] != '\n')
 		{
-			token = strtok(NULL, "\n");
-			for (; *token == ' '; token++);
-			temp = token;
-			for (i = 0; *temp >= '0' && *temp <= '9'; temp++, i++)
-				check = 1;
-
-			if (check == 1)
+			ln++;
+			token = strtok(line, " \n");
+			if (token)
+				word = strdup(token);
+			else
+				continue;
+			if (strcmp(word, "push") == 0)
 			{
-				check = 0;
-				number = malloc(sizeof(char) * i);
-				for (j = 0; j < i; j++, token++)
-					number[j] = *token;
-
-				value = atoi(number);
-				free(number);
-				add_dnodeint(&head, value);
+				value = push(ln, token);
+				if (value != -1)
+					add_dnodeint(&head, value);
 			}
 			else
 			{
-				fprintf(stderr, "L%d: usage: push integer\n", ln);
+				fnc = get_instruction(word);
+				if (fnc)
+					fnc(&head, ln);
 			}
 			free(word);
-			continue;
 		}
-		fnc = get_instruction(word);
-		if (fnc)
-			fnc(&head, ln);
-		free(word);
 	}
 	free_dlistint(head);
 }

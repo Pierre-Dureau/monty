@@ -39,6 +39,7 @@ typedef struct instruction_s
 void start(FILE *file);
 void (*get_instruction(char *word))(stack_t **stack, unsigned int line_number);
 
+int push(unsigned int line_number, char *token);
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
