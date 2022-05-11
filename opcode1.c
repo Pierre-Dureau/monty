@@ -43,7 +43,7 @@ void pop(stack_t **stack, unsigned int line_number)
 
 	if (!*stack)
 	{
-		printf("L%d: can't pop an empty stack\n", line_number);
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
@@ -56,7 +56,7 @@ void pop(stack_t **stack, unsigned int line_number)
 
 /**
  * swap - Swaps the top two elements of the stack
- * 
+ *
  * @stack: A pointer to the adress of the doubly linked list
  * @line_number: The line number of the monty file
  */
@@ -64,9 +64,11 @@ void swap(stack_t **stack, unsigned int line_number)
 {
 	stack_t *head = *stack, *tmp;
 
-	// If empty list or contains just one node
 	if (*stack == NULL || (*stack)->next == NULL)
-		return;
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short", line_number);
+		exit(EXIT_FAILURE);
+	}
 
 	tmp = head->next;
 

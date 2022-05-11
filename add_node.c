@@ -58,3 +58,21 @@ stack_t *add_dnodeint_end(stack_t **head, const int n)
 
 	return (new);
 }
+
+/**
+ * free_dlistint - Free a dl list
+ *
+ * @head: Head of the list
+ */
+
+void free_dlistint(stack_t *head)
+{
+	stack_t *t;
+
+	while (head)
+	{
+		t = head->next;
+		free(head);
+		head = t;
+	}
+}
