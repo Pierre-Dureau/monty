@@ -24,7 +24,8 @@ int push(unsigned int line_number, char *token)
 	}
 	for (i = 0; *temp >= '0' && *temp <= '9'; temp++, i++)
 		check = 1;
-
+	if (*temp != ' ' && *temp != '\n' && *temp != '\0')
+		check = 0;
 	if (check == 1)
 	{
 		if (neg == 1)
@@ -40,8 +41,10 @@ int push(unsigned int line_number, char *token)
 		return (value);
 	}
 	else
+	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-
+		exit(EXIT_FAILURE);
+	}
 	return (-1);
 }
 
