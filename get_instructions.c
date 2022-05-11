@@ -22,10 +22,12 @@ void (*get_instruction(char *word))(stack_t **stack, unsigned int line_number)
 		{"mul", mul},
 		{"mod", mod},
 		{"pchar", pchar},
-		{"pstr", pstr}
+		{"pstr", pstr},
+		{"rotl", rotl},
+		{"rotr", rotr}
 	};
 
-	for (i = 0; i < 12; i++)
+	for (i = 0; i < 14; i++)
 	{
 		if (strcmp(function[i].opcode, word) == 0)
 		{

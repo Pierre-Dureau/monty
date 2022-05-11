@@ -58,3 +58,53 @@ void pstr(stack_t **stack, unsigned int line_number)
 	printf("\n");
 	(void)line_number;
 }
+
+/**
+ * rotl - Rotates the stack to the top
+ *
+ * @stack: A pointer to the adress of the doubly linked list
+ * @line_number: The line number of the monty file
+ */
+
+void rotl(stack_t **stack, unsigned int line_number)
+{
+	int tmp;
+	stack_t *copy;
+
+	if (stack && *stack)
+	{
+		tmp = (*stack)->n;
+		for (copy = *stack; copy->next; copy = copy->next)
+			copy->n = copy->next->n;
+		copy->n = tmp;
+	}
+	(void)line_number;
+}
+
+/**
+ * rotr - Rotates the stack to the bottom
+ *
+ * @stack: A pointer to the adress of the doubly linked list
+ * @line_number: The line number of the monty file
+ */
+
+void rotr(stack_t **stack, unsigned int line_number)
+{
+	int tmp;
+	stack_t *copy;
+
+	if (stack && *stack)
+	{
+		copy = *stack;
+		while (copy->next)
+			copy = copy->next;
+		tmp = copy->n;
+		while (copy->prev)
+		{
+			copy->n = copy->prev->n;
+			copy = copy->prev;
+		}
+		copy->n = tmp;
+	}
+	(void)line_number;
+}
