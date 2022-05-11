@@ -26,7 +26,7 @@ int main(int ac, char **av)
 			exit(EXIT_FAILURE);
 		}
 		else
-			start(file);
+			start();
 	}
 	fclose(file);
 	return (EXIT_SUCCESS);
@@ -38,7 +38,7 @@ int main(int ac, char **av)
  * @file: Monty file with instructions
  */
 
-void start(FILE *file)
+void start()
 {
 	stack_t *head = NULL;
 	char line[100];
@@ -87,5 +87,6 @@ void start(FILE *file)
 void handle_exit(stack_t *stack)
 {
 	free_dlistint(stack);
+	fclose(file);
 	exit(EXIT_FAILURE);
 }
