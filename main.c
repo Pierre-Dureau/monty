@@ -14,7 +14,7 @@ int main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		fprintf(stderr, "USAGE: monty file");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -22,7 +22,7 @@ int main(int ac, char **av)
 		file = fopen(av[1], "r");
 		if (!file)
 		{
-			fprintf(stderr, "Error: Can't open file <file>");
+			fprintf(stderr, "Error: Can't open file %s\n", av[1]);
 			exit(EXIT_FAILURE);
 		}
 		else
