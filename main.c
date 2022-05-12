@@ -53,9 +53,8 @@ void start(FILE *file)
 			token = strtok(line, " \n");
 			if (*token == '#')
 				continue;
-			if (token)
-				word = token;
-			else
+			word = (token ? token : NULL);
+			if (!word)
 				continue;
 			if (CheckStackQueue(&sq, word) == 1)
 				continue;
