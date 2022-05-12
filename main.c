@@ -56,8 +56,6 @@ void start(FILE *file)
 			word = (token ? token : NULL);
 			if (!word)
 				continue;
-			if (CheckStackQueue(&sq, word) == 1)
-				continue;
 			if (strcmp(word, "push") == 0)
 			{
 				value = push(&head, ln, token);
