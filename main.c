@@ -51,11 +51,11 @@ void start(FILE *file)
 		if (line[0] != '\n')
 		{
 			token = strtok(line, " \n");
+			if (!token)
+				continue;
 			if (*token == '#')
 				continue;
-			word = (token ? token : NULL);
-			if (!word)
-				continue;
+			word = token;
 			if (CheckStackQueue(&sq, word) == 1)
 				continue;
 			if (strcmp(word, "push") == 0)
