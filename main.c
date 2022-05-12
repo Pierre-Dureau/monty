@@ -41,9 +41,8 @@ int main(int ac, char **av)
 void start(FILE *file)
 {
 	stack_t *head = NULL;
-	char line[100];
-	char *token, *word;
-	int ln = 0, value;
+	char line[100], *token, *word;
+	int ln = 0, value, sq = 0;
 	void (*fnc)(stack_t **stack, unsigned int line_number);
 
 	while (fgets(line, 100, file) != NULL)
@@ -54,14 +53,18 @@ void start(FILE *file)
 			token = strtok(line, " \n");
 			if (*token == '#')
 				continue;
-			if (token)
-				word = token;
-			else
+			word = (token ? token : NULL);
+			if (!word)
+				continue;
+			if (CheckStackQueue(&sq, word) == 1)
 				continue;
 			if (strcmp(word, "push") == 0)
 			{
 				value = push(&head, ln, token);
-				add_dnodeint(&head, value);
+				if (sq == 0)
+					add_dnodeint(&head, value);
+				else
+					add_dnodeint_end(&head, value);
 			}
 			else
 			{
@@ -77,6 +80,27 @@ void start(FILE *file)
 		}
 	}
 	free_dlistint(head);
+}
+
+/**
+ * CheckStackQueue - Check if the instruction is stack or queue
+ *
+ * @sq: Int for check
+ * @word: The instruction
+ * Return: 1 if success
+ */
+
+int CheckStackQueue(int *sq, char *word)
+{
+	if (strcmp(word, "queue") == 0 || strcmp(word, "stack") == 0)
+	{
+		if (strcmp(word, "queue") == 0)
+			*sq = 1;
+		else
+			*sq = 0;
+		return (1);
+	}
+	return (0);
 }
 
 /**

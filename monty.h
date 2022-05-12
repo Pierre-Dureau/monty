@@ -38,6 +38,7 @@ typedef struct instruction_s
 
 void start(FILE *file);
 void (*get_instruction(char *word))(stack_t **stack, unsigned int line_number);
+int CheckStackQueue(int *sq, char *word);
 void handle_exit(stack_t *stack);
 
 int push(stack_t **stack, unsigned int line_number, char *token);
