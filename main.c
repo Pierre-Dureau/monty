@@ -61,8 +61,7 @@ void start(FILE *file)
 			if (strcmp(word, "push") == 0)
 			{
 				value = push(&head, ln, token);
-				if (value != -1)
-					add_dnodeint(&head, value);
+				add_dnodeint(&head, value);
 			}
 			else
 			{
