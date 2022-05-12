@@ -52,6 +52,8 @@ void start(FILE *file)
 		if (line[0] != '\n')
 		{
 			token = strtok(line, " \n");
+			if (*token == '#')
+				continue;
 			if (token)
 				word = token;
 			else
